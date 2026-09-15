@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tugas Table</title>
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spotify-card {
+            background-color: #121212;
+            color: #fff;
+            width: 250px;
+            padding: 16px;
+            border-radius: 16px;
+            font-family: sans-serif;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        .vinyl-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .vinyl {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #282828;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            animation: spin 4s linear infinite;
+            animation-play-state: paused; /* Default berhenti di tempat */
+        }
+
+        .vinyl.playing {
+            animation-play-state: running; /* Jalan pas diputar */
+        }
+
+        .song-info {
+            margin-bottom: 12px;
+        }
+
+        .song-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0 0 4px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .song-artist {
+            font-size: 11px;
+            color: #b3b3b3;
+            margin: 0;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-play {
+            background-color: #fff;
+            color: #000;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-play:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Foto</th>
+        <th>Kelas</th>
+        <th>Hobi</th>
+        <th>Umur</th>
+        <th>Alamat</th>
+        <th>Pemutar Lagu</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Muhammad Arif Abdurohman</td>
+        <td><img src="https://raw.githubusercontent.com/jamalhensem098-droid/Me-1/refs/heads/main/Screenshot_2026-09-15-08-09-02-228_com.miui.gallery.jpg" width="150"></td>
+        <td>XI TKJ 2</td>
+        <td>Membaca <br>novel</td>
+        <td>16 Tahun</td>
+        <td>Jl. Nama Jalan Kamu</td>
+        <td>
+            <div class="spotify-card">
+                <div class="vinyl-container">
+                    <img src="https://raw.githubusercontent.com/jamalhensem098-droid/Baby/refs/heads/main/images%20(7).jpeg" class="vinyl" id="vinylImg">
+                </div>
+                <div class="song-info">
+                    <p class="song-title">Babydoll</p>
+                    <p class="song-artist">Dominic Fike</p>
+                </div>
+                <div class="player-controls">
+                    <button class="btn-play" id="playBtn">▶</button>
+                </div>
+                <audio id="audioPlayer">
+                    <source src="https://raw.githubusercontent.com/jamalhensem098-droid/Tet/main/Dominic%20Fike%20-%20Babydoll%20(Lyrics)%20%5BpTmwTQrY3Ts%5D.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<script>
+    const audio = document.getElementById('audioPlayer');
+    const vinyl = document.getElementById('vinylImg');
+    const playBtn = document.getElementById('playBtn');
+
+    playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            vinyl.classList.add('playing');
+            playBtn.textContent = '⏸';
+        } else {
+            audio.pause();
+            vinyl.classList.remove('playing');
+            playBtn.textContent = '▶';
+        }
+    });
+
+    audio.addEventListener('ended', () => {
+        vinyl.classList.remove('playing');
+        playBtn.textContent = '▶';
+    });
+</script>
+
+</body>
+</html>
